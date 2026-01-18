@@ -626,13 +626,13 @@ if page == "📊 Executive Dashboard":
         fig1 = px.bar(x=brand_revenue.values, y=brand_revenue.index, orientation='h',
                      title="📊 Revenue by Brand", labels={'x': 'Revenue (QAR)', 'y': 'Brand'},
                      color=brand_revenue.values, color_continuous_scale='Blues')
-        st.plotly_chart(fig1, use_container_width=True)
+        st.plotly_chart(fig1, width='stretch')
     
     with col2:
         brand_counts = df_forecast['brand'].value_counts()
         fig2 = px.pie(values=brand_counts.values, names=brand_counts.index,
                      title="🎯 Market Share by Brand", hole=0.4)
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='stretch')
     
     # Charts Row 2
     col3, col4 = st.columns(2)
@@ -650,7 +650,7 @@ if page == "📊 Executive Dashboard":
                       title="📈 Monthly Sales Trend",
                       labels={'date': 'Date', 'sales': 'Number of Sales'})
         fig3.update_traces(mode='lines+markers')
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, width='stretch')
     
     with col4:
         # Average interest rate trend
@@ -665,7 +665,7 @@ if page == "📊 Executive Dashboard":
                       title="💰 Interest Rate Trend",
                       labels={'date': 'Date', 'interest_rate_pct': 'Interest Rate (%)'})
         fig4.update_traces(mode='lines+markers', line_color='red')
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4, width='stretch')
     
     # External Factors Overview
     st.markdown("### 🌍 External Factors Impact Overview")
@@ -786,7 +786,7 @@ elif page == "📈 Sales Forecasting (12 Months)":
         height=500
     )
     
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     # Detailed forecast table
     st.markdown("### 📋 Detailed Monthly Forecast")
@@ -796,7 +796,7 @@ elif page == "📈 Sales Forecasting (12 Months)":
     display_df['Confidence Range'] = display_df['Upper Bound'] - display_df['Lower Bound']
     
     st.dataframe(display_df.style.background_gradient(cmap='Blues', subset=['Predicted Sales']),
-                use_container_width=True)
+                width='stretch')
     
     # External factors impact
     st.markdown("### 🌍 Key External Factors in Forecast")
@@ -808,14 +808,14 @@ elif page == "📈 Sales Forecasting (12 Months)":
                               title="💰 Projected Interest Rate Trend",
                               labels={'month_name': 'Month', 'interest_rate': 'Interest Rate (%)'})
         fig_interest.update_traces(mode='lines+markers', line_color='green')
-        st.plotly_chart(fig_interest, use_container_width=True)
+        st.plotly_chart(fig_interest, width='stretch')
     
     with col2:
         fig_fuel = px.line(forecast_df, x='month_name', y='fuel_energy_price',
                           title="⛽ Projected Fuel & Energy Index",
                           labels={'month_name': 'Month', 'fuel_energy_price': 'Fuel & Energy Price Index'})
         fig_fuel.update_traces(mode='lines+markers', line_color='orange')
-        st.plotly_chart(fig_fuel, use_container_width=True)
+        st.plotly_chart(fig_fuel, width='stretch')
     
     col3, col4 = st.columns(2)
     
@@ -824,14 +824,14 @@ elif page == "📈 Sales Forecasting (12 Months)":
                          title="🚚 Supply Chain Constraint Projection",
                          labels={'month_name': 'Month', 'supply_chain': 'Supply Chain Constraint'})
         fig_supply.update_traces(mode='lines+markers', line_color='red')
-        st.plotly_chart(fig_supply, use_container_width=True)
+        st.plotly_chart(fig_supply, width='stretch')
     
     with col4:
         fig_season = px.line(forecast_df, x='month_name', y='seasonality',
                           title="📅 Seasonality Index Forecast",
                           labels={'month_name': 'Month', 'seasonality': 'Seasonality Index'})
         fig_season.update_traces(mode='lines+markers', line_color='purple')
-        st.plotly_chart(fig_season, use_container_width=True)
+        st.plotly_chart(fig_season, width='stretch')
     
     # Download forecast
     st.markdown("### 📥 Download Forecast Data")
@@ -914,7 +914,7 @@ elif page == "🏷️ Brand-Level Forecasting":
             height=500
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # Comparison with other brands
         st.markdown("### 📊 Brand Comparison - Total 12-Month Forecast")
@@ -936,7 +936,7 @@ elif page == "🏷️ Brand-Level Forecasting":
                                color='Forecast_Sales',
                                color_continuous_scale='Viridis')
         
-        st.plotly_chart(fig_comparison, use_container_width=True)
+        st.plotly_chart(fig_comparison, width='stretch')
         
         # Detailed table
         st.markdown(f"### 📋 {selected_brand} - Monthly Breakdown")
@@ -945,7 +945,7 @@ elif page == "🏷️ Brand-Level Forecasting":
         display_df.columns = ['Month', 'Predicted Sales', 'Lower Bound', 'Upper Bound']
         
         st.dataframe(display_df.style.background_gradient(cmap='Reds', subset=['Predicted Sales']),
-                    use_container_width=True)
+                    width='stretch')
         
         # Download
         csv = brand_forecast.to_csv(index=False)
@@ -1040,7 +1040,7 @@ elif page == "🔮 Forecast Analysis & Insights":
         height=400
     )
     
-    st.plotly_chart(fig_quarter, use_container_width=True)
+    st.plotly_chart(fig_quarter, width='stretch')
     
     # External factors correlation
     st.markdown("### 🌍 External Factors Impact Analysis")
@@ -1071,7 +1071,7 @@ elif page == "🔮 Forecast Analysis & Insights":
     
     impact_df = pd.DataFrame(impact_data)
     
-    st.dataframe(impact_df, use_container_width=True)
+    st.dataframe(impact_df, width='stretch')
     
     # Brand performance matrix
     st.markdown("### 🏷️ Brand Performance Forecast Matrix")
@@ -1099,7 +1099,7 @@ elif page == "🔮 Forecast Analysis & Insights":
     )
     
     st.dataframe(brand_matrix.style.background_gradient(cmap='YlOrRd', subset=['Total Forecast (12mo)']),
-                use_container_width=True)
+                width='stretch')
     
     # Recommendations
     st.markdown("### 💡 AI-Powered Recommendations")
@@ -1401,7 +1401,7 @@ elif page == "🏠 Action Dashboard" and engine is not None:
             showlegend=False
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         st.markdown("---")
         st.subheader("📊 Next Actions Queue")
@@ -1592,9 +1592,9 @@ elif page == "👥 Customers & Leads" and df_customer is not None:
             
             col_btn1, col_btn2 = st.columns(2)
             with col_btn1:
-                st.button("📞 Call Now", type="primary", use_container_width=True)
+                st.button("📞 Call Now", type="primary", width='stretch')
             with col_btn2:
-                st.button("✉️ Send Email", use_container_width=True)
+                st.button("✉️ Send Email", width='stretch')
         
         with col2:
             st.metric("Purchase Probability", f"{purchase_prob:.0f}%", label_visibility="visible")
@@ -1710,7 +1710,7 @@ elif page == "👥 Customer Segmentation" and df_customer is not None:
     }).round(2)
     segment_summary.columns = ['Count', 'Avg CLV (QAR)', 'Avg Loyalty', 'Avg Churn', 'Avg Services']
     
-    st.dataframe(segment_summary.style.background_gradient(cmap='Blues'), use_container_width=True)
+    st.dataframe(segment_summary.style.background_gradient(cmap='Blues'), width='stretch')
     
     fig = px.scatter(df_customer, x='loyalty_score', y='total_customer_lifetime_value',
                     color='segment_name', size='churn_probability',
@@ -1718,7 +1718,7 @@ elif page == "👥 Customer Segmentation" and df_customer is not None:
                     labels={'loyalty_score': 'Loyalty Score',
                            'total_customer_lifetime_value': 'CLV (QAR)'},
                     hover_data=['brand', 'model'])
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     st.markdown("### 📋 Segment Details")
     selected_segment = st.selectbox("Select Segment:", df_customer['segment_name'].unique())
@@ -1727,7 +1727,7 @@ elif page == "👥 Customer Segmentation" and df_customer is not None:
          'loyalty_score', 'churn_probability']
     ].sort_values('total_customer_lifetime_value', ascending=False)
     
-    st.dataframe(segment_customers.head(50), use_container_width=True)
+    st.dataframe(segment_customers.head(50), width='stretch')
     st.download_button("📥 Download Segment Data",
                       segment_customers.to_csv(index=False),
                       f"segment_{selected_segment}.csv")
@@ -1754,21 +1754,21 @@ elif page == "🚨 Churn Prediction" and df_customer is not None:
                            title="📈 Churn Probability Distribution")
         fig1.add_vline(x=0.7, line_dash="dash", line_color="red",
                       annotation_text="High Risk Threshold")
-        st.plotly_chart(fig1, use_container_width=True)
+        st.plotly_chart(fig1, width='stretch')
     
     with col2:
         churn_segment = df_customer.groupby('segment_name')['churn_probability'].mean().sort_values()
         fig2 = px.bar(x=churn_segment.values, y=churn_segment.index, orientation='h',
                      title="⚠️ Churn Risk by Segment",
                      color=churn_segment.values, color_continuous_scale='Reds')
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='stretch')
     
     st.markdown("### 🎯 Top 30 At-Risk High-Value Customers")
     risk_table = high_risk.head(30)[
         ['customer_id', 'brand', 'model', 'loyalty_score',
          'churn_probability', 'total_customer_lifetime_value', 'segment_name']
     ]
-    st.dataframe(risk_table, use_container_width=True)
+    st.dataframe(risk_table, width='stretch')
     st.download_button("📥 Download High-Risk List",
                       high_risk.to_csv(index=False),
                       "high_risk_customers.csv")
@@ -1800,14 +1800,14 @@ elif page == "💰 Customer Lifetime Value" and df_customer is not None:
     fig.add_trace(go.Scatter(x=[0, max_val], y=[0, max_val],
                             mode='lines', name='Break-even',
                             line=dict(dash='dash', color='gray')))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     st.markdown("### 🌟 Top 30 High-Potential Customers")
     potential_table = high_potential.head(30)[
         ['customer_id', 'brand', 'model', 'segment_name',
          'total_customer_lifetime_value', 'predicted_clv', 'clv_growth_potential']
     ]
-    st.dataframe(potential_table, use_container_width=True)
+    st.dataframe(potential_table, width='stretch')
     st.download_button("📥 Download High-Potential List",
                       high_potential.to_csv(index=False),
                       "high_potential_customers.csv")
@@ -1841,7 +1841,7 @@ elif page == "🔧 Service Optimization" and df_customer is not None:
                 labels={'x': 'Potential Revenue (QAR)', 'y': 'Brand'},
                 color=service_by_brand['avg_service_cost'],
                 color_continuous_scale='Greens')
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     st.markdown("### 📞 Priority Service Contacts")
     priority_filter = st.multiselect("Filter by Priority:",
@@ -1856,7 +1856,7 @@ elif page == "🔧 Service Optimization" and df_customer is not None:
     st.dataframe(priority_table[
         ['customer_id', 'brand', 'model', 'next_service_due_days',
          'priority', 'avg_service_cost', 'warranty_status']
-    ], use_container_width=True)
+    ], width='stretch')
     
     st.download_button("📥 Download Service Opportunities",
                       service_opps.to_csv(index=False),
@@ -1874,7 +1874,7 @@ elif page == "📊 Sales Insights" and df_customer is not None:
     popular_models = popular_models.sort_values('Sales Count', ascending=False).head(20)
     
     st.markdown("### 🏆 Top 20 Best-Selling Models")
-    st.dataframe(popular_models, use_container_width=True)
+    st.dataframe(popular_models, width='stretch')
     
     col1, col2 = st.columns(2)
     
@@ -1883,7 +1883,7 @@ elif page == "📊 Sales Insights" and df_customer is not None:
         fig1 = px.bar(x=year_analysis.index, y=year_analysis.values,
                      title="📅 Sales by Model Year",
                      labels={'x': 'Model Year', 'y': 'Units Sold'})
-        st.plotly_chart(fig1, use_container_width=True)
+        st.plotly_chart(fig1, width='stretch')
     
     with col2:
         brand_type = df_customer.groupby(['brand', 'customer_type']).size().unstack(fill_value=0)
@@ -1893,7 +1893,7 @@ elif page == "📊 Sales Insights" and df_customer is not None:
                         title="👥 Customer Type Preferences by Brand",
                         labels=dict(x="Customer Type", y="Brand", color="Count"),
                         color_continuous_scale="Blues")
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='stretch')
 
 elif page == "🎯 Marketing Campaigns" and df_customer is not None:
     st.markdown("<h1 class='main-header'>Personalized Marketing Campaigns</h1>", unsafe_allow_html=True)
@@ -1944,7 +1944,7 @@ elif page == "🎯 Marketing Campaigns" and df_customer is not None:
         st.info("**Action:** Extended Warranty + Service Package")
         display_df = campaign4
     
-    st.dataframe(display_df.head(50), use_container_width=True)
+    st.dataframe(display_df.head(50), width='stretch')
     st.download_button(f"📥 Download Campaign List",
                       display_df.to_csv(index=False),
                       f"campaign_{campaign_select.split()[1].lower()}.csv")
